@@ -18,10 +18,20 @@ function App() {
       return prevTodos.concat(newTodo);
     })
   }
+
+  const onDeleteTodoHandler = (id:string) => {
+    const exsistingTodo = todos.find((todo)=> todo.id === id);
+
+    if(exsistingTodo){
+      setToDos((prevTodos)=> {
+        return prevTodos.filter((todo) => todo.id !== id)
+      })
+    }
+  }
   return (
     <div>
       <NewTodo onAddTodo={addTodoHandler}/>
-      <Todos items={todos}/>
+      <Todos items={todos} onRemoveTodo={onDeleteTodoHandler}/>
     </div>
   );
 }
